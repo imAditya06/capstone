@@ -59,7 +59,7 @@ FLUSH PRIVILEGES;
 Create a .env file in the project root with:
 ```bash
 DB_USER=emotion_user
-DB_PASS=YourStrongPassword
+DB_PASS=YourStrongPassword123!
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_NAME=emotion_db
