@@ -47,7 +47,7 @@ pip install -r requirements.txt
 CREATE DATABASE IF NOT EXISTS emotion_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Create a dedicated user
-CREATE USER IF NOT EXISTS 'emotion_user'@'localhost' IDENTIFIED BY 'YourStrongPassword';
+CREATE USER IF NOT EXISTS 'emotion_user'@'localhost' IDENTIFIED BY 'YourStrongPassword123!';
 
 -- Grant privileges
 GRANT ALL PRIVILEGES ON emotion_db.* TO 'emotion_user'@'localhost';
