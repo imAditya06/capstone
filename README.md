@@ -22,16 +22,27 @@ cd capstone
 
 # Create venv
 python -m venv venv
+```
+
+### 2. Create and activate a virtual environment
+```bash
 
 # Activate venv
 # On Windows:
 venv\Scripts\activate
 # On Mac/Linux:
 source venv/bin/activate
+```
 
+### 3. Install dependencies
+```bash
 pip install -r requirements.txt
+```
 
-# MYSQL SETUP
+## 🛢️ MySQL Setup
+### 1.Open MySQL Workbench (or CLI).
+### 2.Run the following SQL script (also provided in mysql_setup.sql):
+```sql
 -- Create the database
 CREATE DATABASE IF NOT EXISTS emotion_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -41,8 +52,12 @@ CREATE USER IF NOT EXISTS 'emotion_user'@'localhost' IDENTIFIED BY 'YourStrongPa
 -- Grant privileges
 GRANT ALL PRIVILEGES ON emotion_db.* TO 'emotion_user'@'localhost';
 FLUSH PRIVILEGES;
+```
+### 3.Ensure the tables are created: users, embeddings, emotions, logs.
 
-# Create a .env file in the project root with:
+## 🔑 Environment Variables
+Create a .env file in the project root with:
+```bash
 DB_USER=emotion_user
 DB_PASS=YourStrongPassword
 DB_HOST=127.0.0.1
@@ -50,16 +65,29 @@ DB_PORT=3306
 DB_NAME=emotion_db
 POOL_NAME=emotion_pool
 POOL_SIZE=5
+```
 
-# Running the Project
+## ▶️ Running the Project
+### 1. Build Face Embeddings
+```bash
 python build_embeddings.py
+```
+### 2. Start the Webcam App
+```bash
 python camera_app.py
+```
+The webcam will open.
+Recognized faces and emotions will be displayed on screen.
+All results will be stored in MySQL.
 
-# Viewing results in Mysql
-
+## 📊 Viewing Results in MySQL
+Inside MySQL, run:
+```sql
 USE emotion_db;
 SELECT * FROM logs;
 SELECT * FROM users;
 SELECT * FROM emotions;
+```
+
 
 
