@@ -1,94 +1,78 @@
-# Capstone Project - Emotion Recognition with Face Logging
+# Capstone Project - Multimodal AI Agentic System
 
-## 📌 Overview
-This project is a part of our multimodal AI assistant system.  
-It uses **DeepFace**, **OpenCV**, and **MySQL** to:
+This project is part of a larger **multimodal AI agentic system**.  
+It includes **real-time face recognition and emotion detection** using `DeepFace`, integrated with an **SQLite database** for persistence.
 
-- Recognize faces from a webcam feed  
-- Detect emotions in real time  
-- Store results (face embeddings + emotions) in a MySQL database  
-- Log unknown users automatically  
+---
 
-Built with **Python 3.12**, managed in a **virtual environment**, and designed to integrate with a larger **Streamlit-based AI system**.
+## 🚀 Features
+- Real-time face detection via OpenCV
+- Face recognition & embeddings storage in SQLite
+- Emotion analysis with DeepFace
+- Auto-enroll new users when unknown faces appear
+- Streamlit integration planned for assistant, weather API, news, and Gemini API
 
+---
+
+## 📂 Project Structure
+capstone/
+│── camera_app.py # Main app for webcam face & emotion detection
+│── embeddings.py # Script to add face embeddings to DB
+│── test_db.py # Quick DB test script
+│── capstone.db # SQLite database (auto-created)
+│── requirements.txt # Python dependencies
+│── README.md # Project documentation
+│── .gitignore # Ignored files/folders
+│── venv/ # Virtual environment (not in repo)
+
+```yaml
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### 1️⃣ Clone the repo
 ```bash
 git clone https://github.com/imAditya06/capstone.git
 cd capstone
-
-# Create venv
-python -m venv venv
 ```
-
-### 2. Create and activate a virtual environment
+## 2️⃣ Create & activate virtual environment
 ```bash
-
-# Activate venv
-# On Windows:
-venv\Scripts\activate
-# On Mac/Linux:
-source venv/bin/activate
+python -m venv venv
+venv\Scripts\activate   # On Windows
+# OR
+source venv/bin/activate  # On Mac/Linux
 ```
 
-### 3. Install dependencies
+## 3️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🛢️ MySQL Setup
-### 1.Open MySQL Workbench (or CLI).
-### 2.Run the following SQL script (also provided in mysql_setup.sql):
-```sql
--- Create the database
-CREATE DATABASE IF NOT EXISTS emotion_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- Create a dedicated user
-CREATE USER IF NOT EXISTS 'emotion_user'@'localhost' IDENTIFIED BY 'YourStrongPassword123!';
-
--- Grant privileges
-GRANT ALL PRIVILEGES ON emotion_db.* TO 'emotion_user'@'localhost';
-FLUSH PRIVILEGES;
-```
-### 3.Ensure the tables are created: users, embeddings, emotions, logs.
-
-## 🔑 Environment Variables
-Create a .env file in the project root with:
-```bash
-DB_USER=emotion_user
-DB_PASS=YourStrongPassword123!
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_NAME=emotion_db
-POOL_NAME=emotion_pool
-POOL_SIZE=5
-```
-
-## ▶️ Running the Project
-### 1. Build Face Embeddings
-Place known user images inside the known_people/ folder (each person in their own subfolder). Then run:
-```bash
-python build_embeddings.py
-```
-### 2. Start the Webcam App
+## 4️⃣ Run the camera app
 ```bash
 python camera_app.py
 ```
-The webcam will open.
-Recognized faces and emotions will be displayed on screen.
-All results will be stored in MySQL.
 
-## 📊 Viewing Results in MySQL
-Inside MySQL, run:
-```sql
-USE emotion_db;
-SELECT * FROM logs;
-SELECT * FROM users;
-SELECT * FROM emotions;
+Press q to exit the webcam feed.
+
+If an unknown face appears → it will prompt you to enter a name and auto-save the embedding.
+
+## 🗄️ Database Info
+We now use SQLite instead of MySQL:
+
+Database file: capstone.db
+
+Tables:
+
+users → stores enrolled users
+embeddings → stores face embeddings
+emotions → stores detected emotions with timestamps
+
+To inspect database contents:
+```bash
+sqlite3 capstone.db
+sqlite> .tables
+sqlite> SELECT * FROM users;
+sqlite> SELECT * FROM emotions;
+
 ```
-
-
-
