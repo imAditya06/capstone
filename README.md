@@ -69,6 +69,7 @@ POOL_SIZE=5
 
 ## ▶️ Running the Project
 ### 1. Build Face Embeddings
+Place known user images inside the known_people/ folder (each person in their own subfolder). Then run:
 ```bash
 python build_embeddings.py
 ```
